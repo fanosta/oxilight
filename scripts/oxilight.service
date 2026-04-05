@@ -1,0 +1,26 @@
+[Unit]
+Description=Oxilight - Rust-based light control
+After=network.target
+
+[Service]
+Type=notify
+ExecStart=/usr/local/bin/oxilight
+
+User=oxilight
+Group=oxilight
+
+Restart=on-failure
+RestartSec=100ms
+RestartMaxDelaySec=5min
+RestartSteps=10
+
+PrivateTmp=true
+ProtectSystem=strict
+ProtectKernelTunables=true
+NoNewPrivileges=true
+ProtectHome=true
+
+NotifyAccess=main
+
+[Install]
+WantedBy=multi-user.target
