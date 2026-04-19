@@ -24,6 +24,7 @@ pub struct DimmerConfig {
     pub name: String,
     pub main_target: TargetConfig,
     pub secondary_target: Option<TargetConfig>,
+    pub dimmer_lights: Option<String>,
 }
 #[derive(Debug, PartialEq, Deserialize)]
 pub struct TapDialConfig {

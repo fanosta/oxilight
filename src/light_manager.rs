@@ -156,16 +156,16 @@ impl LightManager {
                 }
             },
             (HueDimmerButton::Up, ButtonEvent::Press) => {
-                let target = config.secondary_target.as_ref().unwrap_or(&config.main_target);
-                self.publish_for_target(target, &json!({"brightness_move": 150}).to_string()).await?;
+                let target_light = config.dimmer_lights.as_ref().unwrap_or(&config.main_target.lights);
+                self.publish_for_light_name(target_light, &json!({"brightness_move": 150}).to_string()).await?;
             },
             (HueDimmerButton::Down, ButtonEvent::Press) => {
-                let target = config.secondary_target.as_ref().unwrap_or(&config.main_target);
-                self.publish_for_target(target, &json!({"brightness_move": -150}).to_string()).await?;
+                let target_light = config.dimmer_lights.as_ref().unwrap_or(&config.main_target.lights);
+                self.publish_for_light_name(target_light, &json!({"brightness_move": -150}).to_string()).await?;
             },
             (HueDimmerButton::Up|HueDimmerButton::Down, ButtonEvent::Release|ButtonEvent::PressRelease|ButtonEvent::HoldRelease) => {
-                let target = config.secondary_target.as_ref().unwrap_or(&config.main_target);
-                self.publish_for_target(target, &json!({"brightness_move": 0}).to_string()).await?;
+                let target_light = config.dimmer_lights.as_ref().unwrap_or(&config.main_target.lights);
+                self.publish_for_light_name(target_light, &json!({"brightness_move": 0}).to_string()).await?;
             },
             _ => {},
         }
